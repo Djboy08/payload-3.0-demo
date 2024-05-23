@@ -6,6 +6,9 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  experimental: {
+    reactCompiler: false
+  }
 }
 
 export default withPayload(nextConfig)
