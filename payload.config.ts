@@ -33,6 +33,7 @@ import { seed } from '@/payload-modules/seed'
 import { slateEditor } from '@payloadcms/richtext-slate'
 import { s3Storage } from '@payloadcms/storage-s3'
 import { Posters } from './src/payload-modules/collections/Posters'
+import MyCustomView from './src/payload-modules/views/my-custom-view'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -42,6 +43,16 @@ export default buildConfig({
   // editor: lexicalEditor(),
   collections: [Users, Tenants, Pages, Media, Events, Posters],
   secret: process.env.PAYLOAD_SECRET || '',
+  admin: {
+    components: {
+      views: {
+        MyCustomView: {
+          Component: MyCustomView,
+          path: '/my-custom-view',
+        },
+      },
+    },
+  },
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
