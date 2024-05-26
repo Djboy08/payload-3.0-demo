@@ -5,7 +5,7 @@ import { User } from '~/payload-types'
 
 // the user must be an admin of the tenant being accessed
 export const tenantAdmins: Access = ({ req: { user } }) => {
-  if (isSuperAdmin(user)) {
+  if (isSuperAdmin(user as NonNullable<User>)) {
     return true
   }
 

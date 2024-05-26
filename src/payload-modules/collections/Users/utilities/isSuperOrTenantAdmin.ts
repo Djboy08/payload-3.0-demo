@@ -10,7 +10,7 @@ export const isSuperOrTenantAdmin = async (args: { req: PayloadRequest }): Promi
     req,
     req: { payload },
   } = args
-  const user: User = req.user
+  const user: User = req.user as NonNullable<User>
   // always allow super admins through
   if (isSuperAdmin(user)) {
     return true

@@ -5,7 +5,7 @@ import { User } from '~/payload-types'
 
 // the user must be an admin of the document's tenant
 export const tenantAdmins: Access = ({ req: { user } }) => {
-  if (checkUserRoles(['super-admin'], user)) {
+  if (checkUserRoles(['super-admin'], user as User)) {
     return true
   }
 

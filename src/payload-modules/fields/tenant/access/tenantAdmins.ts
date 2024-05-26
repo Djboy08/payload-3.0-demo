@@ -4,7 +4,7 @@ import { checkUserRoles } from '../../../utilities/checkUserRoles'
 import { Tenant, User } from '~/payload-types'
 
 export const tenantAdminFieldAccess: FieldAccess = ({ req: { user }, doc }) => {
-  return checkUserRoles(['super-admin'], user)
+  return checkUserRoles(['super-admin'], user as User)
   // ||
   // !doc?.tenant ||
   // (doc?.tenant &&

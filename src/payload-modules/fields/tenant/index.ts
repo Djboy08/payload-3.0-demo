@@ -3,6 +3,7 @@ import type { Field } from 'payload/types'
 import { superAdminFieldAccess } from '../../access/superAdmins'
 import { isSuperAdmin } from '../../utilities/isSuperAdmin'
 import { tenantAdminFieldAccess } from './access/tenantAdmins'
+import { Tenant, User } from '~/payload-types'
 
 export const tenant: Field = {
   name: 'tenant',
@@ -27,12 +28,12 @@ export const tenant: Field = {
     // for super admins, allow them to set the tenant
     beforeChange: [
       async ({ req, req: { user }, data }) => {
-        if ((await isSuperAdmin(req.user)) && data?.tenant) {
+        if ((await isSuperAdmin(req.user as User)) && data?.tenant) {
           return data.tenant
         }
 
-        if (user?.lastLoggedInTenant?.id) {
-          return user.lastLoggedInTenant.id
+        if ((user?.lastLoggedInTenant as Tenant)?.id) {
+          return (user?.lastLoggedInTenant as Tenant)?.id
         }
 
         return undefined
